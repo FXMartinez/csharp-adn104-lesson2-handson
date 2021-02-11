@@ -1,0 +1,24 @@
+so far it looks like  context.Request.Query ends up being a list of variables from the url query string with key values in the form of 
+    example /?firstname=Felix&lastname=Martinez&age=35
+which then looks like this in a list
+    [firstname, Felix], [lastname, Martinez], [age=35]
+
+trying to figure out how to throw this value into the cookie as well. need to learn the structure of the cookie so I know what values i can
+throw into it and where i can throw it in.
+
+I tried a number of ways with conditionals to make the name appear in the cookie. I had a fundamental misunderstanding of the async being run.
+
+I tried to make context.Request.Query["firstname"].ToString() into a variable, same with the last name to get those values and just throw them 
+into the string. This was a mistake because sometimes I would get an empty value and conditions werent being met to get the default.
+
+I then tried a ternary with string interpolation but was doing it incorrect as I was at first just using context.Request.Query, which of course
+was only giving me the collection and then trying to compare that to an empty value. After 20 minutes I realized this was the case then tried to
+a null value instead of an empty string. Again this didnt work, I then added an or with another conditional to compare 
+context.Request.Query["firstname"].ToString() to an empty string and that seemed to do the trick.
+
+one thing i have to keep in mind is that i really need to pay attention to where I am putting my variables and where I am trying to put if statements
+and be more cognizant of the if statements im working in. I for some reason didnt realize the if statement i was working in was checking the cookie value
+for its existence and instead tried to throw an else in there which just resulted in the else always being performed because as i kept hitting refresh
+it wasnt null. So i pretty much got frustrated for nothing and ended up taking longer than expected on something relatively simple. 
+
+well simple if i did it correctly, need confirmation.
